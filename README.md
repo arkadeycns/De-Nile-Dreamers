@@ -11,9 +11,9 @@ We are using the Microsoft Paraphrase Corpus as our dataset.
 ## Problem Description
 Semantic Textual Similarity is a crucial task for a variety of NLP applications, including:
 
-- Information retrieval
+- Information retrieval - finding similar entries, blocking a particular type of comments for a YouTube video
 - Text summarization
-- Paraphrase detection
+- Paraphrase detection - Quora may use it to better categorize the questions
 - Question answering
 
 The goal of STS is to predict how similar two pieces of text are, based on their meanings rather than their surface-level similarity. The challenge is to design models that capture deep semantic relationships, even when the surface forms of the texts differ significantly.
