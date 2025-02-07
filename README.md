@@ -1,4 +1,5 @@
-# Semantic Textual Similarity Benchmark Model
+![68747470733a2f2f692e706f7374696d672e63632f6e6a434d32346b782f776f632e6a7067](https://github.com/user-attachments/assets/92ad2c18-fff2-4901-8a86-05d02bcc894f)
+# Semantic Similarity & Paraphrase Detection Model
 
 ## Overview
 This repository aims to develop a benchmark model for **Semantic Textual Similarity (STS)** problems. The goal is to measure the degree of similarity between two text inputs, which is an important task in Natural Language Processing (NLP). To address this problem, we employ two different solution methods, each designed to optimize the performance and accuracy of the model:
@@ -24,7 +25,7 @@ The goal of STS is to predict how similar two pieces of text are, based on their
 In the first approach, we explore the use of **Gradient Boosting algorithms** to predict semantic similarity. These models rely on features extracted from vector embeddings of the input texts. The features are designed to capture various semantic aspects of the texts, and the Gradient Boosting model leverages these features to make accurate similarity predictions.
 
 #### Key Steps:
-- **Feature Engineering**: We extract a variety of features from the vector embeddings, such as cosine similarity, word overlap, and sentence structure metrics.
+- **Feature Engineering**: We extract a variety of features from the vector embeddings, such as cosine similarity, NER, numerical NER and sentence structure metrics.
 - **Model Training**: A gradient boosting algorithm (e.g., XGBoost, LightGBM) is trained on these features to predict the similarity score between sentence pairs.
 - **Model Evaluation**: We evaluate the model using standard STS evaluation metrics.
   
@@ -35,20 +36,20 @@ For the second approach, we leverage **Pretrained Sentence Transformers** to dir
 - **Sentence Embedding Generation**: We use a pretrained transformer model (`sentence-transformers/paraphrase-MiniLM-L6-v2`) to generate embeddings for the input sentences.
 - **Similarity Scoring**: The cosine similarity between the embeddings of two sentences is calculated to predict the degree of similarity.
 
-### Key Observations
+## Key Observations
 - Just cosine similarity as just this factor was not sufficient, so we tried to get more features to feed to ML algorithms
-  - Refering to msr dataset, row 7 and 26 are completely contradictory... 'She is beautiful' vs 'She is beautiful and intelligent', 0 or 1?
-  - We implemented NER specifically to bring special focus to numbers... If our entire sentence is same other than just a numerical value, what should our program return, 0 or 1? So based, on the training data, our model with adjust this variation.
+  - Refering to MSR dataset, row 7 and 26 are completely contradictory... 'She is beautiful' vs 'She is beautiful and intelligent', 0 or 1?
+  - We implemented NER specifically to bring special focus to numbers... If our entire sentence is same other than just a numerical figure, what should our model return, 0 or 1? So based, on the training data, our model with adjust this variation.
 - Levenshtein distance is useless given that we need to find 'semantic' similarity.
 - We could use bert, siamesse, etc. for similarity calculation but we are using sbert (didn't use tf-idf or word2vec).
-- Tf-idf is inferior to word2vec or any above embedding.
-- Neural network and siamese etc poor due to small corpus, so is sbert (but aboe, we are using pre-trained model)
-- NLTK removed bcz spacy is concise, nltk(a toolkit, but more flexibiolity)  need to download corpus, spacy has inbuilt tokeniser , lemmatizer(pre trained)
+- TF-IDF is inferior to word2vec or any above embedding.
+- Neural networks, siamese etc poor due to small corpus, so is sbert (but aboe, we are using pre-trained model)
+- NLTK removed because spacy is concise, nltk(a toolkit, but more flexibiolity)  need to download corpus, spacy has inbuilt tokeniser , lemmatizer(pre-trained)
 - LSTM -> overfitting, because small corpus, so overfitting even on early stopping, moreover time consuming
 
 
-### Comparison of Methods
-We compare the performance of both approaches using standard STS benchmarks to evaluate which method achieves better accuracy. The pretrained transformer-based model typically performs better on challenging semantic tasks, while the gradient boosting approach can offer competitive results when feature engineering is optimized.
+## Comparison of Methods
+
 
 ## Setup Instructions
 
@@ -59,3 +60,17 @@ You can create a virtual env and install the required libraries using the follow
 
 ```bash
 pip install -r requirements.txt
+```
+
+## Techstacks
+- Sentence-Transformers
+- Streamlit
+- scikit-learn
+- spaCy
+- Python
+- Google Colab
+
+### Made at:
+![68747470733a2f2f692e706f7374696d672e63632f6d7243436e54624e2f7470672e6a7067](https://github.com/user-attachments/assets/5ff446bf-ab8e-4c20-9b1f-ad6709bc2cc4)
+
+
