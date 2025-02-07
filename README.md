@@ -1,0 +1,50 @@
+# Semantic Textual Similarity Benchmark Model
+
+## Overview
+This repository aims to develop a benchmark model for **Semantic Textual Similarity (STS)** problems. The goal is to measure the degree of similarity between two text inputs, which is an important task in Natural Language Processing (NLP). To address this problem, we employ two different solution methods, each designed to optimize the performance and accuracy of the model:
+
+We are using the Microsoft Paraphrase Corpus as our dataset.
+
+1. **Gradient Boosting Techniques**: Utilizing handcrafted features derived from vector embeddings.
+2. **Pretrained Sentence Transformer Models**: Leveraging state-of-the-art models to achieve maximum accuracy in STS tasks.
+
+## Problem Description
+Semantic Textual Similarity is a crucial task for a variety of NLP applications, including:
+
+- Information retrieval
+- Text summarization
+- Paraphrase detection
+- Question answering
+
+The goal of STS is to predict how similar two pieces of text are, based on their meanings rather than their surface-level similarity. The challenge is to design models that capture deep semantic relationships, even when the surface forms of the texts differ significantly.
+
+## Solution Methods
+
+### 1. Gradient Boosting Techniques
+In the first approach, we explore the use of **Gradient Boosting algorithms** to predict semantic similarity. These models rely on features extracted from vector embeddings of the input texts. The features are designed to capture various semantic aspects of the texts, and the Gradient Boosting model leverages these features to make accurate similarity predictions.
+
+#### Key Steps:
+- **Feature Engineering**: We extract a variety of features from the vector embeddings, such as cosine similarity, word overlap, and sentence structure metrics.
+- **Model Training**: A gradient boosting algorithm (e.g., XGBoost, LightGBM) is trained on these features to predict the similarity score between sentence pairs.
+- **Model Evaluation**: We evaluate the model using standard STS evaluation metrics.
+  
+### 2. Pretrained Sentence Transformer Models
+For the second approach, we leverage **Pretrained Sentence Transformers** to directly generate embeddings for sentence pairs. These models, like BERT and its variants, have been pretrained on vast corpora and fine-tuned on STS tasks to capture semantic relationships between text pairs more effectively.
+
+#### Key Steps:
+- **Sentence Embedding Generation**: We use a pretrained transformer model (e.g., `sentence-transformers/paraphrase-MiniLM-L6-v2`) to generate embeddings for the input sentences.
+- **Similarity Scoring**: The cosine similarity between the embeddings of two sentences is calculated to predict the degree of similarity.
+- **Fine-Tuning (Optional)**: In some cases, we further fine-tune the model on specific STS datasets to maximize accuracy for the task at hand.
+
+### Comparison of Methods
+We compare the performance of both approaches using standard STS benchmarks to evaluate which method achieves better accuracy. The pretrained transformer-based model typically performs better on challenging semantic tasks, while the gradient boosting approach can offer competitive results when feature engineering is optimized.
+
+## Setup Instructions
+
+### Requirements
+To run this project, you need the required dependencies have been listed in the requirements.txt file.
+
+You can create a virtual env and install the required libraries using the following command:
+
+```bash
+pip install -r requirements.txt
