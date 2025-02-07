@@ -36,8 +36,8 @@ class TextSimilarityPipeline:
         'catboost': cb.CatBoostClassifier,
         'naive_bayes': GaussianNB,  # Added Naïve Bayes
         'svm': SVC,
-        'knn': KNeighborsClassifier  # Added K-Nearest Neighbors
-
+        'knn': KNeighborsClassifier,  # Added K-Nearest Neighbors
+        'sbert': SentenceTransformer
         }
 
         
@@ -88,13 +88,14 @@ def main():
 
     # Model configurations
     model_configs = [
-    {'model_type': 'logistic_regression'},
-    {'model_type': 'xgboost'},
-    {'model_type': 'svm'},
-    {'model_type': 'lightgbm'},
-    {'model_type': 'random_forest'},
-    {'model_type': 'naive_bayes'},
-    {'model_type': 'knn'}
+    {'model_type': 'logistic_regression', 'model_params':None },
+    {'model_type': 'xgboost', 'model_params': None},
+    {'model_type': 'svm', 'model_params':None },
+    {'model_type': 'lightgbm', 'model_params':None },
+    {'model_type': 'random_forest', 'model_params':None },
+    {'model_type': 'naive_bayes', 'model_params':None },
+    {'model_type': 'knn', 'model_params':None },
+    {'model_type': 'sbert', 'model_params': {'model_name_or_path':"sentence-transformers/paraphrase-MiniLM-L6-v2"}}
 ]
 
 
@@ -103,7 +104,7 @@ def main():
         print(f"\nTraining {config['model_type']} model...")
         pipeline = TextSimilarityPipeline(
             model_type=config['model_type'],
-            
+            model_params=config['model_params']
         )
         # train_features = pipeline.scale_features(train_features)
         pipeline.train(train_features, train_labels)
