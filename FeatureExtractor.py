@@ -7,7 +7,7 @@ import pandas as pd
 from scipy.spatial.distance import cosine, cityblock
 
 class FeatureExtractor:
-    def __init__(self, model_name="all-MiniLM-L6-v2"):
+    def __init__(self, model_name="paraphrase-MiniLM-L6-v2"):
         self.model = SentenceTransformer(model_name)
 
     def get_embedding(self, text):

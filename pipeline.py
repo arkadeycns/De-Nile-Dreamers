@@ -11,7 +11,7 @@ pre_processor = TextPreprocessor()
 input_processed_pair = pre_processor.preprocess_pairs(input_text_pair)
 input_feature_extractor = FeatureExtractor()
 input_features = input_feature_extractor.extract_features(input_text_pair)
-
+print(input_features)
 loaded_model = joblib.load('saved_models\svm.pkl')
 print("Model loaded successfully!")
 

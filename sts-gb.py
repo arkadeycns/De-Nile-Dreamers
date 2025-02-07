@@ -9,7 +9,11 @@ import catboost as cb
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
 from sentence_transformers import SentenceTransformer
+from sklearn.neighbors import KNeighborsClassifier  # KNN
+from sklearn.naive_bayes import GaussianNB  # Naïve Bayes
+
 import joblib
 
 from FeatureExtractor import FeatureExtractor
@@ -25,13 +29,17 @@ class TextSimilarityPipeline:
     def _create_model(self):
         """Create model based on type and parameters."""
         models = {
-            'lightgbm': lgb.LGBMClassifier,
-            'xgboost': xgb.XGBClassifier,
-            'random_forest': RandomForestClassifier,
-            'svm': SVC,
-            'logistic_regression': LogisticRegression,
-            'catboost': cb.CatBoostClassifier
+        'lightgbm': lgb.LGBMClassifier,
+        'xgboost': xgb.XGBClassifier,
+        'random_forest': RandomForestClassifier,
+        'logistic_regression': LogisticRegression,
+        'catboost': cb.CatBoostClassifier,
+        'naive_bayes': GaussianNB,  # Added Naïve Bayes
+        'svm': SVC,
+        'knn': KNeighborsClassifier  # Added K-Nearest Neighbors
+
         }
+
         
         if self.model_type not in models:
             raise ValueError(f"Unsupported model type: {self.model_type}")
@@ -51,6 +59,13 @@ class TextSimilarityPipeline:
         """Evaluate model using pre-extracted features."""
         predictions = self.predict(features)
         return accuracy_score(labels, predictions)
+
+    # def scale_features(self, features):
+    #     """Scale features using Standard Scaler."""
+    #     scaler = StandardScaler()
+    #     return scaler.fit_transform(features)
+
+
 
 
 def main():
@@ -73,19 +88,15 @@ def main():
 
     # Model configurations
     model_configs = [
-        {
-            'model_type': 'lightgbm',
-            
-        },
-        {
-            'model_type': 'xgboost',
-            
-        },
-        {
-            'model_type': 'svm',
-            
-        }
-    ]
+    {'model_type': 'logistic_regression'},
+    {'model_type': 'xgboost'},
+    {'model_type': 'svm'},
+    {'model_type': 'lightgbm'},
+    {'model_type': 'random_forest'},
+    {'model_type': 'naive_bayes'},
+    {'model_type': 'knn'}
+]
+
 
     # Train and evaluate different models
     for config in model_configs:
@@ -94,6 +105,7 @@ def main():
             model_type=config['model_type'],
             
         )
+        # train_features = pipeline.scale_features(train_features)
         pipeline.train(train_features, train_labels)
         accuracy = pipeline.evaluate(test_features, test_labels)
         print(f"{config['model_type']} Test Accuracy: {accuracy:.4f}")
