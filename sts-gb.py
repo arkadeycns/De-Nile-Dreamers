@@ -10,10 +10,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
 from sentence_transformers import SentenceTransformer
-from scipy.spatial.distance import cosine, cityblock
+import joblib
 
 from FeatureExtractor import FeatureExtractor
 from DataLoader import DataLoader
+from TextPreprocessor import TextPreprocessor
 
 class TextSimilarityPipeline:
     def __init__(self, model_type='lightgbm', model_params=None):
@@ -96,6 +97,7 @@ def main():
         pipeline.train(train_features, train_labels)
         accuracy = pipeline.evaluate(test_features, test_labels)
         print(f"{config['model_type']} Test Accuracy: {accuracy:.4f}")
+        joblib.dump(pipeline.model, f"saved_models\{config['model_type']}.pkl")
 
 if __name__ == "__main__":
     main()

@@ -4,6 +4,7 @@ from sentence_transformers import SentenceTransformer
 import os
 import numpy as np
 import pandas as pd
+from scipy.spatial.distance import cosine, cityblock
 
 class FeatureExtractor:
     def __init__(self, model_name="all-MiniLM-L6-v2"):
@@ -48,3 +49,12 @@ class FeatureExtractor:
         
         processed_pairs = preprocessor.preprocess_pairs(text_pairs)
         return self.extract_and_save_features(processed_pairs, output_path)
+    
+    def extract_features(self, text_pairs):
+        features = []
+        for text1, text2 in text_pairs:
+            feature_dict = self.get_features(text1, text2)
+            features.append(feature_dict)
+        
+        features_df = pd.DataFrame(features)
+        return features_df
