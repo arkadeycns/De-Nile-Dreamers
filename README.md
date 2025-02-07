@@ -35,6 +35,17 @@ For the second approach, we leverage **Pretrained Sentence Transformers** to dir
 - **Sentence Embedding Generation**: We use a pretrained transformer model (`sentence-transformers/paraphrase-MiniLM-L6-v2`) to generate embeddings for the input sentences.
 - **Similarity Scoring**: The cosine similarity between the embeddings of two sentences is calculated to predict the degree of similarity.
 
+### Key Observations
+- Just cosine similarity as just this factor was not sufficient, so we tried to get more features to feed to ML algorithms
+  - Refering to msr dataset, row 7 and 26 are completely contradictory... 'She is beautiful' vs 'She is beautiful and intelligent', 0 or 1?
+  - We implemented NER specifically to bring special focus to numbers... If our entire sentence is same other than just a numerical value, what should our program return, 0 or 1? So based, on the training data, our model with adjust this variation.
+- Levenshtein distance is useless given that we need to find 'semantic' similarity.
+- We could use bert, siamesse, etc. for similarity calculation but we are using sbert (didn't use tf-idf or word2vec).
+- Tf-idf is inferior to word2vec or any above embedding.
+- Neural network and siamese etc poor due to small corpus, so is sbert (but aboe, we are using pre-trained model)
+- NLTK removed bcz spacy is concise, nltk(a toolkit, but more flexibiolity)  need to download corpus, spacy has inbuilt tokeniser , lemmatizer(pre trained)
+- LSTM -> overfitting, because small corpus, so overfitting even on early stopping, moreover time consuming
+
 
 ### Comparison of Methods
 We compare the performance of both approaches using standard STS benchmarks to evaluate which method achieves better accuracy. The pretrained transformer-based model typically performs better on challenging semantic tasks, while the gradient boosting approach can offer competitive results when feature engineering is optimized.
