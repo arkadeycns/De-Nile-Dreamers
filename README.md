@@ -21,16 +21,16 @@ The goal of STS is to predict how similar two pieces of text are, based on their
 
 ## Solution Methods
 
-### 1. Gradient Boosting Techniques
-In the first approach, we explore the use of **Gradient Boosting algorithms** to predict semantic similarity. These models rely on features extracted from vector embeddings of the input texts. The features are designed to capture various semantic aspects of the texts, and the Gradient Boosting model leverages these features to make accurate similarity predictions.
+### 1. Predictive models on numerical data
+In the first approach, we explore the use of **Binary Classification Algorithms** to predict semantic similarity. These models rely on features extracted from vector embeddings of the input texts. The features are designed to capture various semantic aspects of the texts, and the model leverages these features to make accurate similarity predictions.
 
 #### Key Steps:
-- **Feature Engineering**: We extract a variety of features from the vector embeddings, such as cosine similarity, NER, numerical NER and sentence structure metrics.
-- **Model Training**: A gradient boosting algorithm (e.g., XGBoost, LightGBM) is trained on these features to predict the similarity score between sentence pairs.
-- **Model Evaluation**: We evaluate the model using standard STS evaluation metrics.
+- **Feature Engineering**: We extract a variety of features like  NER, numerical NER and sentence structure metrics. We also extract features from the vector embeddings, such as cosine similarity, manhattan distance.
+- **Model Training**: Logistic Regression, SVM, XGBoost, LightGBM, etc. are trained on these features to predict the similarity score between sentence pairs.
+- **Model Evaluation**: We evaluate the model using standard accuracy metrics.
   
 ### 2. Pretrained Sentence Transformer Models
-For the second approach, we leverage **Pretrained Sentence Transformers** to directly generate embeddings for sentence pairs. These models, like BERT and its variants, have been pretrained on vast corpora and fine-tuned on STS tasks to capture semantic relationships between text pairs more effectively.
+For the second approach, we leverage **Pretrained Sentence Transformers** to directly generate embeddings for sentence pairs. These models, like MiniLM and its variants, have been pretrained on vast corpora and fine-tuned on STS tasks to capture semantic relationships between text pairs more effectively.
 
 #### Key Steps:
 - **Sentence Embedding Generation**: We use a pretrained transformer model (`sentence-transformers/paraphrase-MiniLM-L6-v2`) to generate embeddings for the input sentences.
