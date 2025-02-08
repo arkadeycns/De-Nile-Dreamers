@@ -43,7 +43,7 @@ For the second approach, we leverage **Pretrained Sentence Transformers** to dir
 - Levenshtein distance is useless given that we need to find 'semantic' similarity.
 - We could use bert, siamesse, etc. for similarity calculation but we are using sbert (didn't use tf-idf or word2vec).
 - TF-IDF is inferior to word2vec or any above embedding.
-- Neural networks, siamese etc poor due to small corpus, so is sbert (but aboe, we are using pre-trained model)
+- Neural networks, siamese etc poor due to small corpus, so training is not feasible. (So above, we are using pre-trained model)
 - NLTK removed because spacy is concise, nltk(a toolkit, but more flexibiolity)  need to download corpus, spacy has inbuilt tokeniser , lemmatizer(pre-trained)
 - LSTM -> overfitting, because small corpus, so overfitting even on early stopping, moreover time consuming
 
