@@ -2,9 +2,9 @@
 # Semantic Similarity & Paraphrase Detection Model
 
 ## Overview
-This repository aims to develop a benchmark model for **Semantic Textual Similarity (STS)** problems. The goal is to measure the degree of similarity between two text inputs, which is an important task in Natural Language Processing (NLP). To address this problem, we employ two different solution methods, each designed to optimize the performance and accuracy of the model:
+This repository aims to develop a model for **Semantic Textual Similarity (STS)** problems. The goal is to measure the degree of similarity between two text inputs, which is an important task in Natural Language Processing (NLP). To address this problem, we employ two different solution methods, each designed to optimize the performance and accuracy of the model:
 
-We are using the Microsoft Paraphrase Corpus as our dataset.
+We have used the Microsoft Paraphrase Corpus as our dataset. Other datasets used during testing phase include Quora Question Pairs dataset.
 
 1. **Binary Classification Techniques**: Utilizing handcrafted features derived from vector embeddings.
 2. **Pretrained Sentence Transformer Models**: Leveraging state-of-the-art models to achieve maximum accuracy in STS tasks.
@@ -12,7 +12,7 @@ We are using the Microsoft Paraphrase Corpus as our dataset.
 ## Problem Description
 Semantic Textual Similarity is a crucial task for a variety of NLP applications, including:
 
-- Information retrieval - Finding similar entries, blocking a particular type of comment under a YouTube video.
+- Information retrieval - Finding similar entries, blocking a particular type of comment for a YouTube video.
 - Text summarization - In generating summaries, STS helps ensure that the summary retains the core meaning of the original text, even if the wording changes.
 - Paraphrase detection - Quora may use it to better categorize the questions.
 - Question answering - Various questions can be categorized to a single common to give an appropriate answer.
@@ -44,7 +44,7 @@ For the second approach, we leverage **Pretrained Sentence Transformers** to dir
 - We could use bert, siamesse, etc. for similarity calculation but we are using sbert (didn't use tf-idf or word2vec).
 - TF-IDF is inferior to word2vec or any above embedding.
 - Neural networks, siamese etc poor due to small corpus, so training is not feasible. (So above, we are using pre-trained model)
-- NLTK removed because spacy is concise, nltk(a toolkit, but more flexibiolity)  need to download corpus, spacy has inbuilt tokeniser , lemmatizer(pre-trained)
+- NLTK removed because spacy is concise, NLTK(a toolkit, but more flexibility)  need to download corpus, spacy has inbuilt tokeniser , lemmatizer(pre-trained)
 - LSTM -> overfitting, because small corpus, so overfitting even on early stopping, moreover time consuming
 
 
@@ -70,7 +70,6 @@ pip install -r requirements.txt
 - Python
 - Google Colab
 
-### Made at:
 ![68747470733a2f2f692e706f7374696d672e63632f6d7243436e54624e2f7470672e6a7067](https://github.com/user-attachments/assets/5ff446bf-ab8e-4c20-9b1f-ad6709bc2cc4)
 
 
