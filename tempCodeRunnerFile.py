@@ -1,0 +1,1 @@
+synset_sim = self.synset_similarity(text1, text2)

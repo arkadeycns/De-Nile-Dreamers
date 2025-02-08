@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import main_  # Importing processing module
+import main_trained  # Importing processing module
 
 def main_app():
     st.title("Sentence Semantic Similarity Checker")
@@ -19,7 +19,6 @@ def main_app():
         "naive_bayes", 
         "svm", 
         "knn", 
-        "sbert"
     ]
     selected_model = st.selectbox("Select a model for processing:", model_options)
 
@@ -29,17 +28,24 @@ def main_app():
 
     if st.button("Check Similarity"):
         if sentence1 and sentence2:
-            result = main_.main(sentence1, sentence2, selected_model)  # Sending to main.py
+            result, similarity_score = main_trained.main(sentence1, sentence2, selected_model)  # Sending to main.py
             
             # Save to history with an incremental index
             st.session_state.history.append(
-                {"Index": len(st.session_state.history) + 1,  # Assign index
-                 "Sentence1": sentence1, "Sentence2": sentence2, 
-                 "Model": selected_model, "Result": result}
+                {
+                 "Index": len(st.session_state.history) + 1,  # Assign index
+                 "Sentence1": sentence1, 
+                 "Sentence2": sentence2, 
+                 "Model": selected_model, 
+                 "Similarity Score": similarity_score,  # Round for better display
+                 "Result": result,
+                }
             )
             
+            # Display Result
             st.write("### Result:")
             st.success(result)
+            st.info(f"Similarity Score: {similarity_score}")  # Display rounded score
         else:
             st.warning("Please enter both sentences.")
     
